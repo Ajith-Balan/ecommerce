@@ -21,15 +21,12 @@ const Register = () => {
   };
 
   const validateForm = () => {
-    const { password, confirmPassword, address } = formData;
+    const { password, confirmPassword } = formData;
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return false;
     }
-    if (address && address.length < 20) {
-      toast.error('Address must be at least 20 characters if entered');
-      return false;
-    }
+  
     return true;
   };
 
@@ -38,7 +35,7 @@ const Register = () => {
     if (!validateForm()) return;
 
     try {
-      const res = await axios.post(`http://localhost:3000/api/v1/auth/register`, formData);
+      const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/register`, formData);
       if (res.status === 201) {
         toast.success('Registered successfully');
         setTimeout(() => {
@@ -136,7 +133,7 @@ const Register = () => {
                   name="address"
                   id="address"
                   className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter your full address (>20 characters)"
+                  placeholder="Enter your full address (Optional)"
                   value={formData.address}
                   onChange={handleChange}
                 />

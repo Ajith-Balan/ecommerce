@@ -24,7 +24,7 @@ const Forget = () => {
 
     setLoading(true);
     try {
-      const { data } = await axios.post('http://localhost:3000/api/v1/auth/forgetpswd', { email });
+      const { data } = await axios.post(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/forgetpswd`, { email });
       setMessage(data.message);
       setError('');
       setOtpSent(true);
@@ -44,7 +44,7 @@ const Forget = () => {
 
     setLoading(true);
     try {
-      const { data } = await axios.post('http://localhost:3000/api/v1/auth/verifyotp', { email, otp });
+      const { data } = await axios.post(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/verifyotp`, { email, otp });
       setMessage(data.message);
       setError('');
       setOtpVerified(true);
@@ -64,7 +64,7 @@ const Forget = () => {
 
     setLoading(true);
     try {
-      await axios.post('http://localhost:3000/api/v1/auth/resetpassword', { email, newPassword });
+      await axios.post(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/resetpassword`, { email, newPassword });
       toast.success('Password reset successful');
       setTimeout(() => {
         navigate('/login');

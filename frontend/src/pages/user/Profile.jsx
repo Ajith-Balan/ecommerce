@@ -32,7 +32,7 @@ const Profile = () => {
     if (!validateForm()) return;
 
     try {
-      const res = await axios.put(`http://localhost:3000/api/v1/auth/profile`, formData);
+      const res = await axios.put(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/profile`, formData);
       if (res?.data?.error) {
         toast.error(res?.data?.error);
       } else {

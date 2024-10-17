@@ -36,7 +36,7 @@ const ProductDetails = () => {
   const getProduct = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/v1/product/getone-product/${id}`
+        `${import.meta.env.VITE_APP_BACKEND}/api/v1/product/getone-product/${id}`
       );
       setProduct({ ...res.data });
     } catch (error) {
@@ -135,19 +135,21 @@ const ProductDetails = () => {
           <h6 className="text-lg font-semibold"> {product.name}</h6>
           <p>{product.size}</p>
           <p className="text-gray-700"> {product.description}</p>
-          <div className="flex items-center justify-between mt-2">
+          <div className="flex gap-2 mt-2">
+            <h3 className="text-red-500 line-through">
+      ₹{product.MRP}
+    </h3>
     <h2 className="text-xl text-green-600 font-bold">
       ₹{product.price}
     </h2>
-    <h3 className="text-red-500 line-through">
-      ₹{product.MRP}
-    </h3>
-    {product.MRP > product.price && (
-    <div className="text-sm text-green-500 font-semibold mt-1">
-       {Math.round(((product.MRP - product.price) / product.MRP) * 100)}% off
+    
+
+  </div>
+              {product.MRP > product.price && (
+    <div className="text-md text-green-500 mr-1 font-semibold mt-1">
+      {Math.round(((product.MRP - product.price) / product.MRP) * 100)}% off
     </div>
   )}
-  </div>
           <div className="w-full flex fixed bottom-0 left-0 right-0  shadow-lg">
   <button
     className="bg-gray-700 text-white w-1/2 py-2  hover:bg-gray-600 transition"

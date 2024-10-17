@@ -10,7 +10,7 @@ const CategoryProduct = () => {
 
     const getProductByCat = async () => {
         try {
-            const res = await axios.get(`http://localhost:3000/api/v1/product/product-category/${id}`);
+            const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND}/api/v1/product/product-category/${id}`);
             setProducts(res.data.products);
             setCategory(res.data.category);
         } catch (error) {

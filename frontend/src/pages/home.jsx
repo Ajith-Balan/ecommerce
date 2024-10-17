@@ -17,7 +17,7 @@ function Home() {
     try {
             setLoading(true); // Start loading
 
-      const { data } = await axios.get("http://localhost:3000/api/v1/product/get-product");
+      const { data } = await axios.get(`${import.meta.env.VITE_APP_BACKEND}/api/v1/product/get-product`);
       setProducts(data);
             setLoading(false); // Stop loading
 
@@ -34,18 +34,24 @@ function Home() {
   return (
     <Layout title={'Shop Now'}>
       <div className='mt-10 '>
+      <div className="flex overflow-x-auto whitespace-nowrap scrollbar-hide space-x-4 p-4">
+  {categories.map((category) => (
+    <Link
+      key={category._id}
+      to={`/category/${category._id}`}
+      className="inline-block p-4  text-sm text-white transition-transform transform rounded shadow-md hover:shadow-lg hover:scale-105"
+    >
+      <img
+        className="h-16 w-16 object-cover rounded-full "
+        src={category.photo}
+        alt={category.name}
+      />
+      <h4 className="text-center text-black mt-2">{category.name}</h4>
+    </Link>
+  ))}
+</div>
 
-      {categories.map((category) => (
-                         <Link
-                         key={category._id}
-                         to={`/category/${category._id}`}
-                         className="inline-block p-2 mr-2 m-2 text-sm text-white transition-transform transform bg-gradient-to-r from-blue-500 to-blue-300 rounded-lg shadow-md hover:shadow-lg hover:bg-gradient-to-r hover:from-red-400 hover:to-red-300 hover:scale-105 "
-                       >
-                         {category.name}
-                       </Link>
-                       
-                       ))}
-                     
+      
                    
 
 
@@ -82,12 +88,13 @@ function Home() {
   <p className="text-gray-600">{p.description}</p>
 
   <div className="flex items-center justify-between mt-2">
+  <h3 className="text-red-500 line-through">
+      ₹{p.MRP}
+    </h3>
     <h2 className="text-xl text-green-600 font-bold">
       ₹{p.price.toLocaleString('en-US')}
     </h2>
-    <h3 className="text-red-500 line-through">
-      ₹{p.MRP}
-    </h3>
+  
   </div>
 
   {p.MRP > p.price && (

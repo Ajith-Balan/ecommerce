@@ -23,7 +23,6 @@ const userSchema=new mongoose.Schema
     
       address: {
         type: {},
-        required: true,
       },
   
       role: {

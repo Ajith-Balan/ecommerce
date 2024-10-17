@@ -19,7 +19,7 @@ const UpdateProduct = () => {
   const getSingleProduct = async () => {
     try {
       const  res  = await axios.get(
-        `http://localhost:3000/api/v1/product/getone-product/${id}`
+        `${import.meta.env.VITE_APP_BACKEND}/api/v1/product/getone-product/${id}`
       );
       setProductData({ ...res.data }); // Correct destructuring
     } catch (error) {
@@ -35,7 +35,7 @@ const UpdateProduct = () => {
   // Get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/api/v1/category/get-category");
+      const { data } = await axios.get(`${import.meta.env.VITE_APP_BACKEND}/api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -56,7 +56,7 @@ const UpdateProduct = () => {
 
 
       const { data } = await axios.post(
-        `http://localhost:3000/api/v1/product/update-product/${id}`, // Use the id from the URL
+        `${import.meta.env.VITE_APP_BACKEND}/api/v1/product/update-product/${id}`, // Use the id from the URL
         productData
       );
       if (data?.success) {
@@ -78,7 +78,7 @@ const UpdateProduct = () => {
       let answer = window.prompt("Are you sure you want to delete this product?");
       if (!answer) return;
       const { data } = await axios.delete(
-        `http://localhost:3000/api/v1/product/delete-product/${id}` // Use the id from the URL
+        `${import.meta.env.VITE_APP_BACKEND}/api/v1/product/delete-product/${id}` // Use the id from the URL
       );
       toast.success("Product Deleted Successfully");
       setTimeout(() => {

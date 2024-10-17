@@ -21,7 +21,7 @@ const OrdersList = () => {
   const getOrders = async () => {
     try {
       if (auth?.user?._id) {
-        const res = await axios.get(`http://localhost:3000/api/v1/auth/getorders`);
+        const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/getorders`);
         setOrders(res.data.orders);
 
         const details = {};
@@ -63,7 +63,7 @@ const OrdersList = () => {
   const updateOrder = async (orderId) => {
     try {
       const updatedOrderDetails = orderDetails[orderId];
-      const res = await axios.post(`http://localhost:3000/api/v1/auth/updateorder/${orderId}`, updatedOrderDetails);
+      const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/updateorder/${orderId}`, updatedOrderDetails);
       toast.success(res.data.message || 'Order updated successfully!');
       getOrders();
     } catch (error) {

@@ -43,7 +43,7 @@ const Payment = () => {
 
   const getProduct = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/v1/product/getone-product/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND}/api/v1/product/getone-product/${id}`);
       const product = res.data;
       setState(prevState => ({
         ...prevState,
@@ -113,7 +113,7 @@ const Payment = () => {
   const handleConfirm = async () => {
     setLoading(true); // Set loading to true when confirming
     try {
-      const res = await axios.post(`http://localhost:3000/api/v1/auth/orders`, { state, photo });
+      const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/orders`, { state, photo });
       if (res.data.success) {
         toast.success("Order confirmed!");
         setTimeout(() => {
@@ -267,8 +267,10 @@ const Payment = () => {
                 type="text"
                 className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 id="userAddress"
-                value={state.userAddress}
-                readOnly
+                value={state.userAddress} 
+                placeholder="Enter your full address"
+
+                onChange={(e) => setState({ ...state, userAddress: e.target.value })}
               />
             </div>
             <div className="mb-4 p-4 border rounded shadow-md">

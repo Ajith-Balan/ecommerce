@@ -2,7 +2,7 @@ import categoryModel from "../models/category.model.js";
 
 export const CreateCategoryController = async (req, res)=>{
 try {
-    const {name} = req.body
+    const {name,photo} = req.body
     if(!name){
         return res.status(401).send({message:'name is required'})
     }
@@ -13,7 +13,7 @@ try {
             message:'category already exists'
         })
     }
-    const category = await new categoryModel({name}).save()
+    const category = await new categoryModel({name,photo}).save()
     res.status(201).send({
         success:true,
         message:'new category created',
@@ -39,11 +39,11 @@ try {
 
 export const updateCategoryController = async (req, res) => {
     try {
-      const { name } = req.body;
+      const { name,photo } = req.body;
       const { id } = req.params;
       const category = await categoryModel.findByIdAndUpdate(
         id,
-        { name },
+        { name,photo },
         { new: true }
       );
       res.status(200).send({

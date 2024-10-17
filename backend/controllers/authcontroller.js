@@ -26,9 +26,7 @@ try {
       if (!phone) {
         return res.send({ message: "Phone no is Required" });
       }
-      if (!address) {
-        return res.send({ message: "Address is Required" });
-      }
+   
    
 
     //check user

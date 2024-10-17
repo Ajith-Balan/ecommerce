@@ -25,7 +25,7 @@ const Login = () => {
         e.preventDefault();
     
         try {
-          const res = await axios.post(`http://localhost:3000/api/v1/auth/login`, formData);
+          const res = await axios.post(`${import.meta.env.VITE_APP_BACKEND}/api/v1/auth/login`, formData);
           if (res.status === 404) {
             toast.error(res.data.msg);
            
